@@ -7,6 +7,9 @@ const balanceEl = document.getElementById("balance");
 // Avalanche Fuji Testnet chainId (hex)
 const AVALANCHE_FUJI_CHAIN_ID = "0xa869";
 
+// 🔹 status koneksi
+let isConnected = false;
+
 function formatAvaxBalance(balanceWei) {
   const balance = parseInt(balanceWei, 16);
   console.log({ balance });
@@ -14,6 +17,23 @@ function formatAvaxBalance(balanceWei) {
 }
 
 async function connectWallet() {
+  // =====================
+  // 🔴 DISCONNECT MODE
+  // =====================
+  if (isConnected) {
+    statusEl.textContent = "Not Connected";
+    statusEl.style.color = "#ffffff";
+    addressEl.textContent = "-";
+    networkEl.textContent = "-";
+    balanceEl.textContent = "-";
+
+    connectBtn.textContent = "Connect Wallet";
+    isConnected = false;
+    return;
+  }
+  // =====================
+  // 🟢 CONNECT MODE
+  // =====================
   if (typeof window.ethereum === "undefined") {
     alert("Core Wallet tidak terdeteksi. Silakan install Core Wallet.");
     return;
@@ -55,6 +75,10 @@ async function connectWallet() {
         console.log({ balanceWei });
 
         balanceEl.textContent = formatAvaxBalance(balanceWei);
+
+        // 🔥 ubah tombol
+      connectBtn.textContent = "Disconnect";
+      isConnected = true;
     } else {
         networkEl.textContent = "Wrong Network";
         statusEl.textContent = "Please Switch to Avalanche Fuji";

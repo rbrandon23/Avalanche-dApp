@@ -62,3 +62,18 @@ button:hover {
     font-size: 13px;
     word-break: break-all;
 }
+
+/* =========================
+   IDENTITAS MAHASISWA
+   ========================= */
+.identity {
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px dashed rgba(255, 255, 255, 0.3);
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.identity p {
+    margin: 4px 0;
+}
